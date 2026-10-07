@@ -1,0 +1,249 @@
+/**
+ * ============================================================================
+ * NeuroScan — Clinical Stylesheet & Design System
+ * Unit I: Modern CSS Grid/Flexbox, WCAG 2.2 accessibility, Dark/Light Themes
+ * ============================================================================
+ */
+
+:root {
+  --bg-primary: #090d16;
+  --bg-secondary: #0f172a;
+  --bg-card: rgba(15, 23, 42, 0.75);
+  --bg-card-hover: rgba(30, 41, 59, 0.85);
+  --border-color: rgba(56, 189, 248, 0.15);
+  --border-focus: #38bdf8;
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --accent-cyan: #0ea5e9;
+  --accent-emerald: #10b981;
+  --accent-rose: #f43f5e;
+  --accent-amber: #f59e0b;
+  --accent-purple: #8b5cf6;
+  --glass-blur: blur(16px);
+  --shadow-glow: 0 0 25px rgba(14, 165, 233, 0.15);
+  --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-card: rgba(255, 255, 255, 0.9);
+  --bg-card-hover: rgba(241, 245, 249, 0.95);
+  --border-color: rgba(148, 163, 184, 0.3);
+  --border-focus: #0284c7;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --shadow-glow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphic Container */
+.glass-panel {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-glow);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-panel:hover {
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+/* Accessible Focus Outlines (WCAG 2.2 AA) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent-cyan);
+  outline-offset: 2px;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #334155;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
+}
+
+/* MRI Canvas Container & Crosshair */
+.canvas-container {
+  position: relative;
+  background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
+.canvas-crosshair {
+  cursor: crosshair;
+}
+
+/* Grid Overlay on Canvas */
+.grid-overlay {
+  background-image: 
+    linear-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Terminal & Diagnostics Console */
+.terminal-console {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
+  background: #050811;
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.2);
+}
+
+/* Pulse Glow Keyframes */
+@keyframes subtlePulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.02); }
+}
+
+.animate-pulse-glow {
+  animation: subtlePulse 2.5s infinite ease-in-out;
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(1000%); }
+}
+
+.scanline-effect::after {
+  content: " ";
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.8), transparent);
+  animation: scanline 2.5s linear infinite;
+  pointer-events: none;
+}
+
+/* Range Input Custom Styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  background: #1e293b;
+  height: 6px;
+  border-radius: 9999px;
+  outline: none;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #0ea5e9;
+  cursor: pointer;
+  box-shadow: 0 0 10px rgba(14, 165, 233, 0.6);
+  transition: transform 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+}
+
+/* Modal Overlay Animation */
+.modal-backdrop {
+  background: rgba(4, 7, 15, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+/* Toast Notifications Container */
+#toast-container {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  pointer-events: none;
+}
+
+.toast-item {
+  pointer-events: auto;
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* ============================================================================
+ * PRINT STYLESHEET (@media print)
+ * Formats clinical report cleanly for physical printer or PDF export
+ * ============================================================================ */
+@media print {
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+  }
+
+  /* Hide all interactive UI components when printing */
+  nav, footer, .no-print, #toast-container, .modal-backdrop-hidden, #role-switcher-modal, #syllabus-modal, #new-patient-modal {
+    display: none !important;
+  }
+
+  .print-only-container {
+    display: block !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .glass-panel {
+    background: #ffffff !important;
+    border: 1px solid #cbd5e1 !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .text-white, .text-slate-100, .text-slate-200, .text-slate-300 {
+    color: #0f172a !important;
+  }
+
+  .text-slate-400, .text-slate-500 {
+    color: #475569 !important;
+  }
+
+  .bg-slate-900, .bg-slate-800, .bg-slate-950 {
+    background-color: #f8fafc !important;
+    border: 1px solid #e2e8f0 !important;
+  }
+}

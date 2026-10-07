@@ -1,0 +1,30 @@
+{
+  "name": "neuroscan",
+  "version": "1.0.0",
+  "description": "NeuroScan: Automated Brain Tumor Detection Platform — Academic Web Technology Project (ETCS336) DES Pune University",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github-eng:1012411060-eng/NeuroScan.git"
+  },
+  "keywords": [
+    "brain-tumor-detection",
+    "medical-imaging",
+    "mri-scanner",
+    "deep-learning-simulation",
+    "pwa",
+    "des-pune-university",
+    "etcs336",
+    "web-technology"
+  ],
+  "author": "DES Pune University - Final Year B.Tech CSE",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}

@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO Meta Tags -->
+  <title>NeuroScan — Automated Brain Tumor Detection Platform | DES Pune University</title>
+  <meta name="description" content="NeuroScan is an academic AI-assisted Brain Tumor MRI Diagnostic Platform demonstrating modern web technologies, asynchronous neural pipelines, and PWA capabilities for ETCS336.">
+  <meta name="keywords" content="Brain Tumor MRI, Medical AI, Deep Learning, ResNet-50, Web Technology, ETCS336, DES Pune University, PWA, Canvas Image Processing">
+  <meta name="author" content="DES Pune University - B.Tech CSE">
+
+  <!-- PWA Manifest & Icons -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0ea5e9">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='48' fill='%230ea5e9'/%3E%3Cpath d='M50 22 C34 22 24 34 24 50 C24 66 34 78 50 78 C66 78 76 66 76 50 C76 34 66 22 50 22 Z' fill='none' stroke='white' stroke-width='6'/%3E%3Ccircle cx='50' cy='50' r='14' fill='%23ffffff'/%3E%3C/svg%3E">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- FontAwesome 6 Icons CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: ['class', '[data-theme="dark"]'],
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+              950: '#082f49'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="antialiased selection:bg-sky-500 selection:text-white">
+
+  <!-- ============================================================================ -->
+  <!-- 1. HEADER & TOP NAVIGATION (Unit I Semantic Layout & WCAG 2.2 Accessibility) -->
+  <!-- ============================================================================ -->
+  <header class="sticky top-0 z-40 bg-slate-950/80 backdrop-blur-md border-b border-slate-800/80">
+    <nav id="main-navbar" aria-label="Main Navigation">
+      <!-- Injected via navbar.js -->
+    </nav>
+  </header>
+
+  <!-- ============================================================================ -->
+  <!-- 2. MAIN APPLICATION WORKSPACE -->
+  <!-- ============================================================================ -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-8">
+
+    <!-- HERO / LIVE CLINICAL METRICS BANNER -->
+    <section class="glass-panel rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-slate-900/90 to-sky-950/40 relative overflow-hidden" aria-label="Platform Overview and Metrics">
+      <!-- Glow decoration -->
+      <div class="absolute -right-20 -top-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-80 h-80 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        
+        <!-- Left: Branding & Academic Callout -->
+        <div class="lg:col-span-7 space-y-3">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-sky-500/10 text-sky-400 border border-sky-500/20">
+            <i class="fas fa-microscope text-xs"></i>
+            <span>Deep Learning Computer-Aided MRI Diagnostics</span>
+          </div>
+          <h1 class="text-2xl sm:text-4xl font-extrabold tracking-tight text-slate-100">
+            Automated Brain Tumor Detection & Clinical Reporting
+          </h1>
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-2xl">
+            A state-of-the-art diagnostic platform implementing multi-class ResNet-50 tensor classification, Grad-CAM Region-of-Interest (ROI) localization, and DICOM windowing for Glioma, Meningioma, and Pituitary pathologies.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-3 pt-2">
+            <span class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">
+              <i class="fas fa-keyboard text-sky-400 mr-1.5"></i>Shortcuts: <kbd class="font-mono bg-slate-900 px-1 py-0.5 rounded text-sky-300">Ctrl+D</kbd> Diagnose • <kbd class="font-mono bg-slate-900 px-1 py-0.5 rounded text-sky-300">Ctrl+U</kbd> Upload • <kbd class="font-mono bg-slate-900 px-1 py-0.5 rounded text-sky-300">Ctrl+P</kbd> Print
+            </span>
+          </div>
+        </div>
+
+        <!-- Right: Real-time Metric Cards -->
+        <div class="lg:col-span-5 grid grid-cols-2 gap-3">
+          
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-sky-500/40 transition">
+            <div class="flex items-center justify-between text-slate-400 text-xs">
+              <span>Overall Accuracy</span>
+              <i class="fas fa-bullseye text-emerald-400"></i>
+            </div>
+            <div class="mt-2 text-2xl font-black font-mono text-emerald-400">98.4%</div>
+            <div class="text-[10px] text-slate-400 mt-1">Validated on 3,264 Scans</div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-sky-500/40 transition">
+            <div class="flex items-center justify-between text-slate-400 text-xs">
+              <span>Model Latency</span>
+              <i class="fas fa-bolt text-amber-400"></i>
+            </div>
+            <div class="mt-2 text-2xl font-black font-mono text-amber-400">~160ms</div>
+            <div class="text-[10px] text-slate-400 mt-1">TensorRT FP16 Acceleration</div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-sky-500/40 transition">
+            <div class="flex items-center justify-between text-slate-400 text-xs">
+              <span>Target Classes</span>
+              <i class="fas fa-layer-group text-purple-400"></i>
+            </div>
+            <div class="mt-2 text-2xl font-black font-mono text-purple-400">4 Types</div>
+            <div class="text-[10px] text-slate-400 mt-1">Glioma/Mening/Pituit/Normal</div>
+          </div>
+
+          <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/80 hover:border-sky-500/40 transition">
+            <div class="flex items-center justify-between text-slate-400 text-xs">
+              <span>Course Unit</span>
+              <i class="fas fa-university text-sky-400"></i>
+            </div>
+            <div class="mt-2 text-xl font-bold font-mono text-sky-400">ETCS336</div>
+            <div class="text-[10px] text-slate-400 mt-1">DES Pune University</div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- 3. PATIENT PORTAL & REGISTRY (Unit III Component Architecture & Unit IV REST) -->
+    <!-- ============================================================================ -->
+    <section id="patient-portal-section" aria-label="Patient Registry">
+      <!-- Injected via patientPortal.js -->
+    </section>
+
+    <!-- ============================================================================ -->
+    <!-- 4. INTERACTIVE DIAGNOSTIC WORKSPACE (Canvas Image Processor + AI Engine)     -->
+    <!-- ============================================================================ -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+      
+      <!-- LEFT: HTML5 Canvas MRI Processing Studio (7 Cols) -->
+      <section class="lg:col-span-7 glass-panel rounded-2xl p-6 space-y-5" aria-label="MRI Canvas Processing Studio">
+        
+        <!-- Header & Preset Selector -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-700/60">
+          <div>
+            <h2 class="text-xl font-bold text-slate-100 flex items-center gap-2.5">
+              <i class="fas fa-sliders text-sky-400"></i>
+              MRI Canvas Studio
+            </h2>
+            <p class="text-xs text-slate-400 mt-0.5">
+              Interactive pixel adjustment, colormaps, and spatial lesion inspection.
+            </p>
+          </div>
+
+          <!-- Quick Test Presets -->
+          <div class="flex flex-wrap items-center gap-1.5" role="group" aria-label="Test MRI Presets">
+            <button type="button" data-mri-preset="glioma" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-sky-500 text-white shadow-lg shadow-sky-500/25 transition">
+              Glioma
+            </button>
+            <button type="button" data-mri-preset="meningioma" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+              Meningioma
+            </button>
+            <button type="button" data-mri-preset="pituitary" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+              Pituitary
+            </button>
+            <button type="button" data-mri-preset="normal" class="px-3 py-1.5 rounded-xl text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition">
+              Normal
+            </button>
+          </div>
+        </div>
+
+        <!-- Canvas Display Area -->
+        <div class="canvas-container w-full aspect-square max-h-[460px] border border-slate-700/80 relative group shadow-2xl">
+          <canvas id="mri-main-canvas" width="512" height="512" class="w-full h-full object-contain canvas-crosshair" aria-label="Brain MRI Scan Visualizer"></canvas>
+          
+          <!-- Scanline overlay effect -->
+          <div class="scanline-effect pointer-events-none"></div>
+
+          <!-- Bottom Left Canvas Overlay Stats -->
+          <div class="absolute bottom-3 left-3 px-3 py-1.5 rounded-lg bg-slate-950/80 backdrop-blur-md border border-slate-800 text-[11px] font-mono text-slate-300 flex items-center gap-3 pointer-events-none">
+            <span><i class="fas fa-expand text-sky-400 mr-1"></i>512x512 px</span>
+            <span><i class="fas fa-layer-group text-emerald-400 mr-1"></i>16-Bit Grayscale</span>
+          </div>
+
+          <!-- Top Right Canvas Actions -->
+          <div class="absolute top-3 right-3 flex items-center gap-2">
+            <button id="btn-download-canvas" type="button" class="p-2 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs transition" title="Export Processed PNG" aria-label="Export PNG">
+              <i class="fas fa-download"></i>
+            </button>
+            <button id="btn-reset-canvas" type="button" class="p-2 rounded-lg bg-slate-900/80 hover:bg-slate-800 text-slate-200 border border-slate-700 text-xs transition" title="Reset Filters" aria-label="Reset Filters">
+              <i class="fas fa-rotate-left"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Drag-and-Drop / File Upload Zone -->
+        <div id="mri-dropzone" class="p-3.5 rounded-xl border-2 border-dashed border-slate-700 hover:border-sky-500 bg-slate-900/40 hover:bg-slate-900/60 transition cursor-pointer flex items-center justify-between text-xs text-slate-400">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-slate-800 flex items-center justify-center text-sky-400 text-base">
+              <i class="fas fa-cloud-arrow-up"></i>
+            </div>
+            <div>
+              <span class="font-semibold text-slate-200 block">Upload Custom Brain MRI Scan</span>
+              <span class="text-[11px] text-slate-500">Drag & drop or click to browse (JPEG, PNG, WebP &lt; 5MB)</span>
+            </div>
+          </div>
+          <input id="input-mri-file" type="file" accept="image/jpeg,image/png,image/webp" class="hidden" />
+          <span class="px-3 py-1 rounded-lg bg-slate-800 text-sky-400 border border-slate-700 text-[11px] font-medium hidden sm:inline-block">
+            Browse File
+          </span>
+        </div>
+
+        <!-- Real-Time Filter & Colormap Controls Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          
+          <!-- Brightness -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs text-slate-400">
+              <span><i class="fas fa-sun text-amber-400 mr-1.5"></i>Brightness</span>
+              <span id="val-brightness" class="font-mono text-slate-200">0%</span>
+            </div>
+            <input id="slider-brightness" type="range" min="-100" max="100" value="0" class="w-full" aria-label="Brightness slider" />
+          </div>
+
+          <!-- Contrast -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs text-slate-400">
+              <span><i class="fas fa-circle-half-stroke text-sky-400 mr-1.5"></i>Contrast</span>
+              <span id="val-contrast" class="font-mono text-slate-200">0%</span>
+            </div>
+            <input id="slider-contrast" type="range" min="-100" max="100" value="0" class="w-full" aria-label="Contrast slider" />
+          </div>
+
+          <!-- Zoom -->
+          <div class="space-y-1">
+            <div class="flex justify-between text-xs text-slate-400">
+              <span><i class="fas fa-magnifying-glass-plus text-emerald-400 mr-1.5"></i>Zoom & Pan</span>
+              <span id="val-zoom" class="font-mono text-slate-200">1.0x</span>
+            </div>
+            <input id="slider-zoom" type="range" min="1.0" max="3.5" step="0.1" value="1.0" class="w-full" aria-label="Zoom slider" />
+          </div>
+
+        </div>
+
+        <!-- Colormaps & Toggles Bar -->
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-slate-800 text-xs">
+          
+          <!-- Colormap Dropdown -->
+          <div class="flex items-center gap-2">
+            <span class="text-slate-400 text-xs"><i class="fas fa-palette text-purple-400 mr-1"></i>Colormap:</span>
+            <select id="select-colormap" class="px-2.5 py-1 bg-slate-900 border border-slate-700 rounded-lg text-xs text-slate-200 focus:border-sky-500 focus:outline-none">
+              <option value="grayscale">Grayscale (Standard MRI)</option>
+              <option value="jet">Jet Heatmap</option>
+              <option value="viridis">Viridis Spectral</option>
+              <option value="turbo">Turbo Gradient</option>
+            </select>
+          </div>
+
+          <!-- Toggle Switches -->
+          <div class="flex items-center gap-4">
+            
+            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+              <input id="toggle-invert" type="checkbox" class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0" />
+              <span>Invert Filter</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+              <input id="toggle-roi" type="checkbox" checked class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0" />
+              <span>Show ROI Saliency</span>
+            </label>
+
+            <label class="flex items-center gap-2 cursor-pointer text-slate-300 hover:text-white">
+              <input id="toggle-grid" type="checkbox" class="rounded bg-slate-900 border-slate-700 text-sky-500 focus:ring-0" />
+              <span>Grid Crosshair</span>
+            </label>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- RIGHT: Asynchronous AI Diagnostics & Softmax Analytics (5 Cols) -->
+      <section id="ai-diagnostics-section" class="lg:col-span-5 h-full" aria-label="AI Diagnostics Pipeline">
+        <!-- Injected via aiDiagnostics.js -->
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- ============================================================================ -->
+  <!-- 5. FOOTER & ACADEMIC DISCLAIMER (Course Compliance)                          -->
+  <!-- ============================================================================ -->
+  <footer class="mt-16 bg-slate-950 border-t border-slate-800/80 py-10 text-slate-400 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+      
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold text-base">
+            <i class="fas fa-brain"></i>
+          </div>
+          <div>
+            <h3 class="font-bold text-slate-200 text-sm">NeuroScan Platform</h3>
+            <p class="text-[11px] text-slate-500">Web Technology (ETCS336 - Pattern 2024R1) • Final Year Capstone</p>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4 text-slate-400 text-[11px]">
+          <span class="flex items-center gap-1.5"><i class="fas fa-code text-sky-400"></i>Vanilla ES2020+ & Node.js</span>
+          <span class="flex items-center gap-1.5"><i class="fas fa-shield-alt text-emerald-400"></i>OWASP Top 10 Compliant</span>
+          <span class="flex items-center gap-1.5"><i class="fas fa-mobile-alt text-purple-400"></i>PWA Ready</span>
+        </div>
+      </div>
+
+      <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-center text-slate-400 space-y-1">
+        <p class="font-semibold text-slate-300 text-xs">
+          ACADEMIC DISCLAIMER: Strictly for Educational / Academic Evaluation — DES Pune University B.Tech CSE.
+        </p>
+        <p class="text-[11px] text-slate-500">
+          This system is an academic simulation designed to demonstrate full-stack web technologies, canvas graphics, and asynchronous API architecture. Not approved as a primary diagnostic medical device.
+        </p>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500 pt-2 border-t border-slate-900">
+        <p>© 2026 DES Pune University. All rights reserved.</p>
+        <p class="font-mono">Repository: 1012411060-eng/NeuroScan</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ============================================================================ -->
+  <!-- 6. MODALS CONTAINER (Role Switcher, Patient Register, Report, Syllabus)      -->
+  <!-- ============================================================================ -->
+
+  <!-- ROLE SWITCHER MODAL -->
+  <div id="role-switcher-modal" class="modal-container hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="role-modal-title">
+    <div class="glass-panel w-full max-w-lg rounded-2xl border border-sky-500/30 p-6 bg-slate-900 text-slate-100 shadow-2xl relative">
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div>
+          <h3 id="role-modal-title" class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <i class="fas fa-id-badge text-sky-400"></i>
+            Switch Clinician Role (RBAC Simulation)
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Select a practitioner persona to simulate role-based authorization.</p>
+        </div>
+        <button id="btn-close-role-modal" type="button" class="modal-close-btn text-slate-400 hover:text-white" aria-label="Close Role Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <div id="role-modal-list" class="mt-4 space-y-2.5 max-h-80 overflow-y-auto pr-1">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- NEW PATIENT REGISTRATION MODAL -->
+  <div id="new-patient-modal" class="modal-container hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="reg-modal-title">
+    <div class="glass-panel w-full max-w-xl rounded-2xl border border-sky-500/30 p-6 bg-slate-900 text-slate-100 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800">
+        <div>
+          <h3 id="reg-modal-title" class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <i class="fas fa-user-plus text-sky-400"></i>
+            Register New Neurological Patient
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Client-side OWASP validated clinical intake form (Unit I/V).</p>
+        </div>
+        <button id="btn-close-new-patient-modal" type="button" class="modal-close-btn text-slate-400 hover:text-white" aria-label="Close Registration Modal">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+
+      <!-- Error Validation Container -->
+      <div id="form-patient-errors" class="mt-3 p-3 rounded-xl bg-rose-500/20 border border-rose-500/40 text-xs text-rose-200 hidden space-y-1">
+        <!-- Injected if validation fails -->
+      </div>
+
+      <form id="form-register-patient" class="mt-4 space-y-3.5 text-xs">
+        
+        <div>
+          <label for="reg-patient-name" class="block font-semibold text-slate-300 mb-1">Full Patient Name *</label>
+          <input id="reg-patient-name" type="text" required placeholder="e.g. Vikram Malhotra" class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none" />
+        </div>
+
+        <div class="grid grid-cols-3 gap-3">
+          <div>
+            <label for="reg-patient-age" class="block font-semibold text-slate-300 mb-1">Age *</label>
+            <input id="reg-patient-age" type="number" min="1" max="120" required placeholder="e.g. 45" class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none" />
+          </div>
+
+          <div>
+            <label for="reg-patient-gender" class="block font-semibold text-slate-300 mb-1">Gender *</label>
+            <select id="reg-patient-gender" required class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="reg-patient-blood" class="block font-semibold text-slate-300 mb-1">Blood Group</label>
+            <select id="reg-patient-blood" class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none">
+              <option value="B+">B+</option>
+              <option value="O+">O+</option>
+              <option value="A+">A+</option>
+              <option value="AB+">AB+</option>
+              <option value="B-">B-</option>
+              <option value="O-">O-</option>
+              <option value="A-">A-</option>
+              <option value="AB-">AB-</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label for="reg-patient-phone" class="block font-semibold text-slate-300 mb-1">Phone Number</label>
+          <input id="reg-patient-phone" type="tel" placeholder="+91 98765 43210" class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label for="reg-patient-symptoms" class="block font-semibold text-slate-300 mb-1">Primary Symptoms & Clinical Indications *</label>
+          <textarea id="reg-patient-symptoms" rows="2" required placeholder="e.g. Progressive left temporal headache, visual aura, intermittent nausea..." class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none"></textarea>
+        </div>
+
+        <div>
+          <label for="reg-patient-history" class="block font-semibold text-slate-300 mb-1">Medical History & Prior Interventions</label>
+          <input id="reg-patient-history" type="text" placeholder="e.g. Hypertension, No previous cranial interventions" class="w-full px-3 py-2 bg-slate-800/80 border border-slate-700 rounded-xl text-slate-100 focus:border-sky-500 focus:outline-none" />
+        </div>
+
+        <div class="pt-3 flex items-center justify-end gap-3 border-t border-slate-800">
+          <button type="button" class="modal-close-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-800 hover:bg-slate-700 text-slate-300 transition">
+            Cancel
+          </button>
+          <button type="submit" class="px-5 py-2 rounded-xl text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 transition">
+            Save & Register Patient
+          </button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- PRINTABLE MEDICAL REPORT MODAL -->
+  <div id="report-modal" class="modal-container hidden fixed inset-0 z-50 flex items-center justify-center p-4 modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="report-modal-title">
+    <div class="glass-panel w-full max-w-4xl rounded-2xl border border-sky-500/30 p-6 bg-slate-900 text-slate-100 shadow-2xl relative max-h-[92vh] flex flex-col">
+      
+      <!-- Modal Top Bar -->
+      <div class="flex items-center justify-between pb-4 border-b border-slate-800 shrink-0">
+        <div>
+          <h3 id="report-modal-title" class="text-base font-bold text-slate-100 flex items-center gap-2">
+            <i class="fas fa-file-medical-alt text-sky-400"></i>
+            Clinical Diagnostic Report Preview
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">Formal medical documentation with hospital credentials and SHA-256 signature.</p>
+        </div>
+        
+        <div class="flex items-center gap-3">
+          <button id="btn-print-report" type="button" class="px-3.5 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 flex items-center gap-2 transition cursor-pointer">
+            <i class="fas fa-print"></i>
+            <span>Print / Export PDF</span>
+          </button>
+          <button id="btn-close-report-modal" type="button" class="modal-close-btn text-slate-400 hover:text-white p-1" aria-label="Close Report Modal">
+            <i class="fas fa-times text-base"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Report Body Container (Scrollable Preview) -->
+      <div id="report-preview-body" class="mt-4 overflow-y-auto pr-1 flex-1">
+        <!-- Rendered dynamically -->
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SYLLABUS MAPPING MODAL -->
+  <div id="syllabus-modal" class="modal-container hidden" role="dialog" aria-modal="true">
+    <!-- Injected via syllabusModal.js -->
+  </div>
+
+  <!-- TOAST NOTIFICATIONS CONTAINER -->
+  <div id="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Main ES2020 Module Entry Point -->
+  <script type="module" src="js/app.js"></script>
+
+</body>
+</html>
