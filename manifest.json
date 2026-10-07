@@ -1,7 +1,7 @@
 {
   "name": "NeuroScan: Automated Brain Tumor Detection Platform",
   "short_name": "NeuroScan",
-  "description": "Academic Web Technology (ETCS336) Platform for AI-Assisted Brain Tumor MRI Diagnostics",
+  "description": "AI-Assisted Brain Tumor MRI Diagnostics and Clinical Reporting Platform",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0b1120",

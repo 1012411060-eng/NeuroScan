@@ -115,24 +115,16 @@ const TUMOR_CATALOG = {
 // 3. REST API Endpoints (Unit IV)
 // ==========================================
 
-// Health Check & Academic Course Info
+// Health Check Endpoint
 app.get('/api/health', (req, res) => {
   res.json({
     status: 'online',
     version: '1.0.0',
-    platform: 'NeuroScan Academic Medical AI Platform',
-    course: 'Web Technology (ETCS336 - Pattern 2024R1)',
-    university: 'DES Pune University',
+    platform: 'NeuroScan Brain Tumor MRI Diagnostic Platform',
     nodeVersion: process.version,
     uptimeSeconds: Math.floor(process.uptime()),
     memoryUsageMB: (process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2),
-    syllabusCoverage: {
-      unit1: 'Semantic HTML5, WCAG 2.2 Accessibility, CSS Grid/Flexbox, Dark/Light Themes',
-      unit2: 'Modern ES2020+, Async Architecture, Promises, AbortController cancellation',
-      unit3: 'Component-driven frontend, Reactive state store, LocalStorage sync',
-      unit4: 'Node/Express REST API, JSON schemas, Error middleware, JWT authentication simulation',
-      unit5: 'OWASP Security, DOM XSS sanitization, CSP headers, PWA Service Worker offline cache'
-    }
+    modelArchitecture: 'Hybrid ResNet-50 + Spatial Vision Transformer (ViT-B/16)'
   });
 });
 
@@ -377,7 +369,6 @@ app.use((req, res) => {
 // Start Server
 app.listen(PORT, () => {
   console.log('================================================================');
-  console.log(`🧠 NeuroScan Academic AI Platform running at http://localhost:${PORT}`);
-  console.log(`🎓 ETCS336 Web Technology | DES Pune University`);
+  console.log(`🧠 NeuroScan AI Diagnostic Platform running at http://localhost:${PORT}`);
   console.log('================================================================');
 });

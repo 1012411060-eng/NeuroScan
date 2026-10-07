@@ -12,6 +12,7 @@
 
 ---
 
+
 ## 📋 Executive Overview
 
 **NeuroScan** is an end-to-end clinical medical web application that performs automated MRI-based brain tumor screening, multi-class Softmax classification (**Glioma**, **Meningioma**, **Pituitary Adenoma**, or **Healthy Normal**), and Grad-CAM Region of Interest (ROI) lesion localization with one-click printable medical diagnostic reports.

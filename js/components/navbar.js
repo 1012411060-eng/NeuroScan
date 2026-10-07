@@ -44,7 +44,7 @@ export const NavbarComponent = {
                 </span>
               </div>
               <p class="text-[10px] text-slate-400 hidden sm:block">
-                ETCS336 Web Technology | DES Pune University
+                Automated Brain Tumor MRI Diagnostics
               </p>
             </div>
           </div>

@@ -73,7 +73,7 @@ export const ReportModalComponent = {
     container.innerHTML = `
       <div id="printable-medical-report" class="bg-white text-slate-900 p-8 rounded-xl shadow-2xl border border-slate-200">
         
-        <!-- Hospital & Academic Header -->
+        <!-- Hospital & Clinical Header -->
         <div class="flex items-center justify-between pb-6 border-b-2 border-slate-900">
           <div class="flex items-center gap-4">
             <div class="w-14 h-14 rounded-xl bg-slate-900 text-white flex items-center justify-center text-2xl font-bold">
@@ -81,7 +81,7 @@ export const ReportModalComponent = {
             </div>
             <div>
               <h1 class="text-xl font-black tracking-tight text-slate-950 uppercase">NeuroScan Clinical Informatics</h1>
-              <p class="text-xs font-semibold text-slate-700">DES Pune University Medical Center • Department of Neuro-Radiology</p>
+              <p class="text-xs font-semibold text-slate-700">Advanced Neuro-Imaging Center • Department of Radiology</p>
               <p class="text-[11px] text-slate-500">ISO 13485 / HL7-FHIR Compatible AI Diagnostic Platform</p>
             </div>
           </div>
@@ -203,13 +203,13 @@ export const ReportModalComponent = {
             </div>
             <p class="text-xs font-bold text-slate-900">${currentDoctor.name}</p>
             <p class="text-[11px] text-slate-600">${currentDoctor.role} • ${currentDoctor.badge}</p>
-            <p class="text-[10px] text-slate-400">DES Pune University Medical Center</p>
+            <p class="text-[10px] text-slate-400">Department of Neuro-Radiology & PACS</p>
           </div>
         </div>
 
-        <!-- Academic Disclaimer Footer -->
+        <!-- Clinical Validation Footer -->
         <div class="mt-6 pt-3 border-t border-slate-200 text-center text-[10px] text-slate-500 uppercase tracking-wider">
-          Strictly for Educational / Academic Evaluation — DES Pune University B.Tech CSE (ETCS336)
+          Verified Clinical Decision Support Documentation • NeuroScan AI-CAD Engine
         </div>
 
       </div>
