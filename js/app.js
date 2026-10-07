@@ -14,7 +14,6 @@ import { PatientPortalComponent } from './components/patientPortal.js';
 import { CanvasViewerComponent } from './components/canvasViewer.js';
 import { AIDiagnosticsComponent } from './components/aiDiagnostics.js';
 import { ReportModalComponent } from './components/reportModal.js';
-import { SyllabusModalComponent } from './components/syllabusModal.js';
 import { ApiService } from './services/api.js';
 
 class NeuroScanApp {
@@ -31,7 +30,6 @@ class NeuroScanApp {
     CanvasViewerComponent.init();
     AIDiagnosticsComponent.init();
     ReportModalComponent.init();
-    SyllabusModalComponent.init();
 
     // 3. Register Global Keyboard Shortcuts
     this._registerShortcuts();
@@ -112,17 +110,6 @@ class NeuroScanApp {
   }
 
   _bindModals() {
-    // Role Switcher Modal Close
-    const roleModal = document.getElementById('role-switcher-modal');
-    const roleCloseBtn = document.getElementById('btn-close-role-modal');
-
-    if (roleModal && roleCloseBtn) {
-      roleCloseBtn.addEventListener('click', () => roleModal.classList.add('hidden'));
-      roleModal.addEventListener('click', (e) => {
-        if (e.target === roleModal) roleModal.classList.add('hidden');
-      });
-    }
-
     // New Patient Modal Close
     const patientModal = document.getElementById('new-patient-modal');
     const patientCloseBtn = document.getElementById('btn-close-new-patient-modal');

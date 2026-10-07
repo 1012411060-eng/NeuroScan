@@ -16,7 +16,6 @@ export const NavbarComponent = {
     this.checkHealthStatus();
 
     // Subscribe to state updates
-    Store.subscribe('currentDoctor', () => this.updateDoctorBadge());
     Store.subscribe('theme', (theme) => this.applyTheme(theme));
   },
 
@@ -59,20 +58,6 @@ export const NavbarComponent = {
               <span id="api-status-text">REST API Online</span>
             </div>
 
-            <!-- Syllabus Unit Mapping Button -->
-            <button id="btn-open-syllabus" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-slate-800/80 hover:bg-slate-700 text-sky-300 border border-sky-500/30 flex items-center gap-2 transition" aria-label="Open Syllabus Mapping Modal">
-              <i class="fas fa-graduation-cap"></i>
-              <span class="hidden md:inline">Syllabus Mapping</span>
-            </button>
-
-            <!-- Role / Doctor Switcher Trigger Button -->
-            <button id="btn-open-role-switcher" type="button" class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 flex items-center gap-2 transition" aria-label="Switch Active Clinician Profile">
-              <span id="nav-doctor-avatar">${currentDoctor.avatar}</span>
-              <span id="nav-doctor-name" class="font-semibold text-slate-100 hidden lg:inline">${currentDoctor.name}</span>
-              <span class="text-[10px] text-slate-400 hidden xl:inline">(${currentDoctor.role})</span>
-              <i class="fas fa-chevron-down text-[10px] text-slate-400"></i>
-            </button>
-
             <!-- Light / Dark Theme Toggle -->
             <button id="btn-theme-toggle" type="button" class="p-2 rounded-lg text-slate-300 hover:text-white bg-slate-800 hover:bg-slate-700 border border-slate-700 transition" aria-label="Toggle Dark and Light Theme">
               <i id="theme-icon" class="fas ${theme === 'dark' ? 'fa-sun text-amber-400' : 'fa-moon text-sky-400'}"></i>
@@ -94,31 +79,6 @@ export const NavbarComponent = {
         Store.setState({ theme: nextTheme });
       });
     }
-
-    // Role Switcher Modal Trigger
-    const roleBtn = document.getElementById('btn-open-role-switcher');
-    if (roleBtn) {
-      roleBtn.addEventListener('click', () => {
-        this.openRoleModal();
-      });
-    }
-
-    // Syllabus Modal Trigger
-    const syllabusBtn = document.getElementById('btn-open-syllabus');
-    if (syllabusBtn) {
-      syllabusBtn.addEventListener('click', () => {
-        const modal = document.getElementById('syllabus-modal');
-        if (modal) modal.classList.remove('hidden');
-      });
-    }
-  },
-
-  updateDoctorBadge() {
-    const { currentDoctor } = Store.getState();
-    const avatarEl = document.getElementById('nav-doctor-avatar');
-    const nameEl = document.getElementById('nav-doctor-name');
-    if (avatarEl) avatarEl.textContent = currentDoctor.avatar;
-    if (nameEl) nameEl.textContent = currentDoctor.name;
   },
 
   applyTheme(theme) {
@@ -143,38 +103,5 @@ export const NavbarComponent = {
         text.textContent = 'PWA Offline Mode';
       }
     }
-  },
-
-  openRoleModal() {
-    const modal = document.getElementById('role-switcher-modal');
-    if (!modal) return;
-
-    const list = document.getElementById('role-modal-list');
-    const { currentDoctor } = Store.getState();
-
-    list.innerHTML = CONFIG.DOCTOR_PROFILES.map(doc => `
-      <button type="button" data-doc-id="${doc.id}" class="w-full p-3.5 rounded-xl border text-left flex items-center justify-between transition ${doc.id === currentDoctor.id ? 'bg-sky-950/60 border-sky-500 text-white ring-1 ring-sky-500' : 'bg-slate-800/60 border-slate-700/80 hover:bg-slate-800 text-slate-200'}">
-        <div class="flex items-center gap-3">
-          <div class="text-2xl">${doc.avatar}</div>
-          <div>
-            <h4 class="font-semibold text-sm text-slate-100">${doc.name}</h4>
-            <p class="text-xs text-sky-400 font-medium">${doc.role} • <span class="text-slate-400 font-normal">${doc.specialty}</span></p>
-            <p class="text-[11px] text-slate-400 mt-0.5 font-mono">${doc.badge}</p>
-          </div>
-        </div>
-        ${doc.id === currentDoctor.id ? '<i class="fas fa-check-circle text-sky-400 text-lg"></i>' : '<i class="fas fa-arrow-right text-slate-500 text-sm"></i>'}
-      </button>
-    `).join('');
-
-    // Bind item clicks
-    list.querySelectorAll('button[data-doc-id]').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const id = btn.getAttribute('data-doc-id');
-        AuthService.switchDoctor(id);
-        modal.classList.add('hidden');
-      });
-    });
-
-    modal.classList.remove('hidden');
   }
 };
