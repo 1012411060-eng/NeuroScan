@@ -48,7 +48,15 @@ export const ReportModalComponent = {
     if (!container) return;
 
     const { patients, selectedPatientId, currentDoctor, currentDiagnosis, activeImageSource } = Store.getState();
-    const patient = patients.find(p => p.id === selectedPatientId) || patients[0];
+    const patient = (patients && patients.find(p => p.id === selectedPatientId)) || {
+      id: currentDiagnosis?.patientId || 'NS-WALKIN',
+      name: 'Walk-In Diagnostic Subject',
+      age: 'N/A',
+      gender: 'Unspecified',
+      bloodGroup: 'N/A',
+      primarySymptoms: 'Outpatient Brain MRI Diagnostic Screening',
+      medicalHistory: 'None documented'
+    };
 
     if (!currentDiagnosis) {
       container.innerHTML = `

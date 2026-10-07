@@ -7,103 +7,14 @@
 import { CONFIG } from '../config.js';
 
 const STORAGE_KEYS = {
-  PATIENTS: 'neuroscan_patients_v1',
-  CURRENT_DOCTOR: 'neuroscan_doctor_v1',
-  THEME: 'neuroscan_theme_v1',
-  AUDIT_LOGS: 'neuroscan_audit_v1',
-  RECENT_DIAGNOSES: 'neuroscan_diagnoses_v1'
+  PATIENTS: 'neuroscan_patients_clean_v1',
+  CURRENT_DOCTOR: 'neuroscan_doctor_clean_v1',
+  THEME: 'neuroscan_theme_clean_v1',
+  AUDIT_LOGS: 'neuroscan_audit_clean_v1',
+  RECENT_DIAGNOSES: 'neuroscan_diagnoses_clean_v1'
 };
 
-const DEFAULT_PATIENTS = [
-  {
-    id: 'NS-1042',
-    name: 'Aarav Patel',
-    age: 48,
-    gender: 'Male',
-    bloodGroup: 'B+',
-    phone: '+91 98231 45012',
-    admissionDate: '2026-10-02',
-    primarySymptoms: 'Severe chronic morning cephalalgia, left-sided motor weakness',
-    medicalHistory: 'Hypertension (5 yrs), Non-smoker',
-    status: 'Diagnosis Pending',
-    mriScans: [
-      {
-        scanId: 'SCN-8801',
-        scanDate: '2026-10-05',
-        type: 'T1-CE Axial',
-        tumorType: 'Glioma',
-        confidence: 96.8,
-        status: 'Confirmed'
-      }
-    ]
-  },
-  {
-    id: 'NS-1043',
-    name: 'Sunita Deshmukh',
-    age: 54,
-    gender: 'Female',
-    bloodGroup: 'O+',
-    phone: '+91 94220 87319',
-    admissionDate: '2026-10-04',
-    primarySymptoms: 'Visual field deficit (bitemporal hemianopsia), endocrine fatigue',
-    medicalHistory: 'Hypothyroidism, No prior cranial surgeries',
-    status: 'High Priority',
-    mriScans: [
-      {
-        scanId: 'SCN-8802',
-        scanDate: '2026-10-06',
-        type: 'T2-FLAIR Coronal',
-        tumorType: 'Pituitary Adenoma',
-        confidence: 94.2,
-        status: 'Reviewed'
-      }
-    ]
-  },
-  {
-    id: 'NS-1044',
-    name: 'Rohan Joshi',
-    age: 36,
-    gender: 'Male',
-    bloodGroup: 'A+',
-    phone: '+91 97654 11092',
-    admissionDate: '2026-10-06',
-    primarySymptoms: 'Focal seizure with secondary generalization',
-    medicalHistory: 'No chronic illnesses, Athlete',
-    status: 'Under Review',
-    mriScans: [
-      {
-        scanId: 'SCN-8803',
-        scanDate: '2026-10-07',
-        type: 'T1-Post Contrast',
-        tumorType: 'Meningioma',
-        confidence: 92.5,
-        status: 'Confirmed'
-      }
-    ]
-  },
-  {
-    id: 'NS-1045',
-    name: 'Kavita Menon',
-    age: 29,
-    gender: 'Female',
-    bloodGroup: 'AB+',
-    phone: '+91 91588 34901',
-    admissionDate: '2026-10-07',
-    primarySymptoms: 'Post-concussion routine screening after low-impact motor accident',
-    medicalHistory: 'Clear neurological baseline',
-    status: 'Clear / Healthy',
-    mriScans: [
-      {
-        scanId: 'SCN-8804',
-        scanDate: '2026-10-07',
-        type: 'T2-Weighted Axial',
-        tumorType: 'No Tumor Detected',
-        confidence: 99.1,
-        status: 'Verified'
-      }
-    ]
-  }
-];
+const DEFAULT_PATIENTS = [];
 
 class StateStore {
   constructor() {
@@ -112,7 +23,7 @@ class StateStore {
       theme: this._load(STORAGE_KEYS.THEME, 'dark'),
       currentDoctor: this._load(STORAGE_KEYS.CURRENT_DOCTOR, CONFIG.DOCTOR_PROFILES[0]),
       patients: this._load(STORAGE_KEYS.PATIENTS, DEFAULT_PATIENTS),
-      selectedPatientId: 'NS-1042',
+      selectedPatientId: null,
       activePresetKey: 'glioma',
       activeImageSource: null, // HTMLImageElement or data URL
       activeScanType: 'T1-CE Axial',

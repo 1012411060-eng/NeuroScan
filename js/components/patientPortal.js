@@ -223,7 +223,26 @@ export const PatientPortalComponent = {
     const active = patients.find(p => p.id === selectedPatientId) || patients[0];
 
     if (!active) {
-      banner.innerHTML = `<p class="text-xs text-slate-400">No active patient selected.</p>`;
+      banner.innerHTML = `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between w-full gap-3 py-1">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-slate-800/80 border border-slate-700 flex items-center justify-center text-slate-400 text-base">
+              <i class="fas fa-user-plus"></i>
+            </div>
+            <div>
+              <h3 class="font-bold text-xs text-slate-200">No Patient Registered or Selected</h3>
+              <p class="text-[11px] text-slate-400">Click "Register Patient" to record subject demographics, or run inference as a Walk-In.</p>
+            </div>
+          </div>
+          <button id="btn-banner-register" type="button" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-sky-500 hover:bg-sky-400 text-slate-950 transition self-start sm:self-auto">
+            <i class="fas fa-plus mr-1"></i>Add Patient
+          </button>
+        </div>
+      `;
+      const bannerBtn = banner.querySelector('#btn-banner-register');
+      if (bannerBtn) {
+        bannerBtn.addEventListener('click', () => this.openRegisterModal());
+      }
       return;
     }
 
